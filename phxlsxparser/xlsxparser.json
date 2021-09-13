@@ -1,0 +1,99 @@
+{
+    "appid": "ce43a9c6-1cb0-4da7-8793-341f619f20b6",
+    "name": "XLSX Parser",
+    "description": "Parses XLSX files.",
+    "type": "information",
+    "product_vendor": "Duke",
+    "logo": "xlsxparser.png",
+    "logo_dark": "xlsxparser_dark.png",
+    "product_name": "Duke",
+    "python_version": "3",
+    "product_version_regex": ".*",
+    "publisher": "Duke",
+    "license": "Copyright (c) Duke, 2020",
+    "app_version": "1.0.0",
+    "utctime_updated": "2020-08-18T21:41:50.687589Z",
+    "package_name": "phantom_xlsxparser",
+    "main_module": "xlsxparser_connector.py",
+    "min_phantom_version": "4.9.34514",
+    "app_wizard_version": "1.0.0",
+    "configuration": {},
+    "pip3_dependencies": {
+        "wheel": [
+          {"module": "et_xmlfile", "input_file": "wheels/et_xmlfile-1.0.1-py3-none-any.whl"},
+          {"module": "jdcal", "input_file": "wheels/jdcal-1.4.1-py2.py3-none-any.whl"},
+          {"module": "openpyxl", "input_file": "wheels/openpyxl-3.0.4-py2.py3-none-any.whl"},
+          {"module": "xlrd", "input_file": "wheels/xlrd-1.2.0-py2.py3-none-any.whl"}
+        ]
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity using supplied configuration",
+            "verbose": "",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "parse_xlsx",
+            "identifier": "parse_xlsx",
+            "description": "Parses XLSX files.",
+            "verbose": "Parses XLSX files.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "vault_id": {
+                    "description": "vault ID for XLSX file.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.vault_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "vault_id",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data",
+                    "data_type": "string",
+                    "column_name": "data",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        }
+    ]
+}
