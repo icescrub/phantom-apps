@@ -1,0 +1,4 @@
+.git*
+*.py
+checkphish_view.pyc
+display_screenshot.html

@@ -1,0 +1,125 @@
+{
+    "appid": "d1c9ec30-5981-4635-b906-75ec90a665a9",
+    "name": "CheckPhish",
+    "description": "Detects and categorizes scam websites.",
+    "type": "information",
+    "product_vendor": "RedMarlin",
+    "logo": "checkphish.png",
+    "logo_dark": "checkphish_dark.png",
+    "product_name": "CheckPhish.ai",
+    "product_version_regex": ".*",
+    "publisher": "Custom",
+    "license": "Copyright (c) Custom, 2020",
+    "app_version": "1.0.0",
+    "utctime_updated": "2020-02-13T18:24:30.867683Z",
+    "package_name": "phantom_checkphish",
+    "main_module": "checkphish_connector.pyc",
+    "min_phantom_version": "4.6.19142",
+    "app_wizard_version": "1.0.0",
+    "configuration": {
+        "base_url": {
+            "description": "Base URL for accessing CheckPhish's API.",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "https://developers.checkphish.ai/api",
+            "order": 0
+        },
+        "api_key": {
+            "description": "API key associated with CheckPhish account.",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "",
+            "order": 1
+        }
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity using supplied configuration",
+            "verbose": "",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "detonate url",
+            "identifier": "detonate_url",
+            "description": "Check for the presence of a domain in a threat intelligence feed",
+            "verbose": "",
+            "type": "investigate",
+            "read_only": true,
+            "parameters": {
+                "domain": {
+                    "description": "Domain to lookup.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": true,
+                    "contains": [
+                        "domain",
+                        "url"
+                    ],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.domain",
+                    "data_type": "string",
+                    "contains": [
+                        "domain",
+                        "url"
+                    ],
+                    "column_name": "domain",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.disposition",
+                    "data_type": "string",
+                    "column_name": "disposition",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.brand",
+                    "data_type": "string",
+                    "column_name": "brand",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.resolved",
+                    "data_type": "string",
+                    "column_name": "resolved",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+                },
+            "versions": "EQ(*)"
+        }
+    ]
+}
